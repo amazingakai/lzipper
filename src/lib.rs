@@ -16,8 +16,7 @@
 //! let input = b"the quick brown fox jumps over the lazy dog";
 //!
 //! let mut encoded = Vec::new();
-//! let mut encoder = Encoder::new(input.as_slice())
-//!     .expect("failed to setup encoder");
+//! let mut encoder = Encoder::new(input.as_slice());
 //! encoder.encode(&mut encoded).expect("failed to encode");
 //!
 //! let mut decoded = Vec::new();

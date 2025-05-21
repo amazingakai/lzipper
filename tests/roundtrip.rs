@@ -14,7 +14,7 @@ fn roundtrip() {
     let input = b"the quick brown fox jumps over the lazy dog";
 
     let mut encoded: Vec<u8> = Vec::new();
-    let mut encoder = Encoder::new(input.as_slice()).expect("failed to setup encoder");
+    let mut encoder = Encoder::new(input.as_slice());
     encoder.encode(&mut encoded).expect("failed to encode");
 
     let mut decoded: Vec<u8> = Vec::new();
@@ -52,7 +52,7 @@ fn roundtrip_files() {
         let mut input_file =
             File::open(&input_path).expect("failed to open input file for reading");
         let mut encoded_file = File::create(&encoded_path).expect("failed to create encoded file");
-        let mut encoder = Encoder::new(&mut input_file).expect("failed to setup encoder");
+        let mut encoder = Encoder::new(&mut input_file);
         encoder.encode(&mut encoded_file).expect("failed to encode");
     }
 
@@ -81,7 +81,7 @@ fn roundtrip_large() {
     let input = vec![0; 10 * 1024 * 1024]; // 10 MiB of zeros
 
     let mut encoded: Vec<u8> = Vec::new();
-    let mut encoder = Encoder::new(input.as_slice()).expect("failed to setup encoder");
+    let mut encoder = Encoder::new(input.as_slice());
     encoder.encode(&mut encoded).expect("failed to encode");
 
     let mut decoded: Vec<u8> = Vec::new();
@@ -95,8 +95,7 @@ fn roundtrip_max_compression_level() {
     let input = vec![0; 10 * 1024 * 1024]; // 10 MiB of zeros
 
     let mut encoded: Vec<u8> = Vec::new();
-    let mut encoder = Encoder::new_with_level(input.as_slice(), CompressionLevel::Maximum)
-        .expect("failed to setup encoder");
+    let mut encoder = Encoder::new_with_level(input.as_slice(), CompressionLevel::Maximum);
     encoder.encode(&mut encoded).expect("failed to encode");
 
     let mut decoded: Vec<u8> = Vec::new();

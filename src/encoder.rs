@@ -34,8 +34,7 @@ pub enum CompressionLevel {
 ///
 /// let input = b"the quick brown fox jumps over the lazy dog";
 /// let mut encoded: Vec<u8> = Vec::new();
-/// let mut encoder = Encoder::new(input.as_slice())
-///     .expect("failed to setup encoder");
+/// let mut encoder = Encoder::new(input.as_slice());
 /// encoder.encode(&mut encoded).expect("failed to encode");
 /// ```
 pub struct Encoder<R: Read> {
@@ -55,7 +54,7 @@ impl<R: Read> Encoder<R> {
     /// Creates a new `Encoder` instance with default compression level.
     ///
     /// The `input` parameter is a stream of data to be compressed.
-    pub fn new(input: R) -> Result<Self, LzipError> {
+    pub fn new(input: R) -> Self {
         Self::new_with_level(input, CompressionLevel::Default)
     }
 
@@ -63,14 +62,14 @@ impl<R: Read> Encoder<R> {
     ///
     /// The `input` parameter is a stream of data to be compressed.
     /// The `level` parameter specifies the compression level.
-    pub fn new_with_level(input: R, level: CompressionLevel) -> Result<Self, LzipError> {
-        Ok(Encoder {
+    pub fn new_with_level(input: R, level: CompressionLevel) -> Self {
+        Encoder {
             input: BufReader::new(input),
             compression_level: level,
             crc32: 0,
             uncompressed_size: 0,
             compressed_size: 0,
-        })
+        }
     }
 
     /// Compresses the data from the input stream and writes it to the output stream.
