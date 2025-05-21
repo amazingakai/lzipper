@@ -3,5 +3,14 @@ name = "lzipper"
 version = "0.1.0"
 edition = "2024"
 license = "GPL-2.0-or-later"
+authors = ["Azhar Momin <azharmomin@proton.me>"]
+keywords = ["lzip", "lzma", "encoding"]
+repository = "https://github.com/AmazingAkai/lzipper"
+homepage = "https://github.com/AmazingAkai/lzipper"
+description = "A Rust library for for handling compression and decompression of lzip format."
+categories = ["compression"]
+exclude = [".github/"]
 
 [dependencies]
+liblzma = "0.4.1"
+crc32fast = "1.4.2"

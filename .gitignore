@@ -1,8 +1,8 @@
 # Compiled Rust files
-target/
+**/target/
 
 # Lock file, should not be committed
-Cargo.lock
+**/Cargo.lock
 
 # VScode 
 .vscode/
